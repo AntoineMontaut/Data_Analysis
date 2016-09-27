@@ -23,21 +23,20 @@ data = data.splitlines()
 data = [line.split(",") for line in data]
 
 cols = data[0]
-ds = pd.DataFrame(data[1::], columns=cols)
+# print data[1::]
+ds = pd.DataFrame(data[1:], columns=cols)
 
 #change column content to another type
 for col in cols[1:]:
     ds[col] = ds[col].astype(float)
-
-# print(ds)
-
-lst = [1, 1, 2, 3, 4, 1]
-print stats.mode(lst)
+print("Dataset:")
+print(ds)
 
 # get mean, median, and mode
 for col in cols[1:]:
-    print("{0}:\nMean: {1}, median: {2}, mode: {3}".format(\
-    col, round(ds[col].mean(),2), ds[col].median(), float(stats.mode(ds[col])[0])))
-    print("Range: {1}, st. dev.: {2}, variance: {3}".format(\
-    col, ds[col].max()-ds[col].min(), round(ds[col].std(),2), round(ds[col].var(),2)))
     print("\n")
+    print("{0}:\nMean: {1}, median: {2}, mode: {3}".format(\
+    col, round(ds[col].mean(), 2), ds[col].median(), float(stats.mode(ds[col])[0])))
+    print("Range: {1}, st. dev.: {2}, variance: {3}".format(\
+    col, ds[col].max()-ds[col].min(), round(ds[col].std(), 2), round(ds[col].var(), 2)))
+    print("Relative variability: {0}".format(round(ds[col].std()/ds[col].mean(), 2)))
