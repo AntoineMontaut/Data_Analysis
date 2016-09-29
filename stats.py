@@ -41,4 +41,3 @@ for col in cols[1:]:
     col, ds[col].max()-ds[col].min(), round(ds[col].std(), 2), round(ds[col].var(), 2)))
     print("Relative variability: {0}".format(round(ds[col].std()/ds[col].mean(), 2)))
     
-print(ds[ds.Region=="North"]["Alcohol"])
