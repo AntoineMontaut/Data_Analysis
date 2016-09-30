@@ -16,6 +16,8 @@ x = "Revolving.CREDIT.Balance" #in the dataset I'm working with it seems that co
 x_name = x.replace(".", " ")
 freq = collections.Counter(loans_data[x])
 
+print("\nNote: using the small dataset it seems like the values for Open.CREDIT.Lines are under the column Revolving.CREDIT.Balance.")
+
 def all_plots(data, name):
     '''Get the three plots on one figure for a specified column'''
     #create figure and add subplots
@@ -43,7 +45,8 @@ all_plots(loans_data[x], x_name)
 #lets assume expeted values are normally distributed with same mean and std
 avg = loans_data[x].mean()
 std = loans_data[x].std()
-# print("\nFor {0}, the mean is {1}, and standard deviation is {2}.".format(x_name, round(avg,1), round(std,1)))
+mod = int(stats.mode(loans_data[x])[0])
+print("\nFor {0}, the mean is {1}, and standard deviation is {2}, and the mode is {3}.".format(x_name, round(avg,1), round(std,1), mod))
 expected_values = list(np.random.normal(loc=avg, scale=std, size=len(loans_data[x])))
 for index in xrange(len(expected_values)):
     expected_values[index] = round(expected_values[index], 0)
@@ -54,8 +57,8 @@ for k in freq.keys():
     expected_freq[k] = expected_values.count(k)
 
 #get chi and p
-chi, p = stats.chisquare(freq.values()) #by default assumed all values to be equally likely
+chi, p = stats.chisquare(freq.values()) #by default assumes equal frequency for all values
 # chi, p = stats.chisquare(freq.values(), expected_freq.values())
-print("For {0}, chi = {1}, and p = {2}.".format(x_name, chi, p))
+print("Chi-square:\nFor {0}, chi = {1}, and p = {2}.".format(x_name, chi, p))
 
 plt.show()
