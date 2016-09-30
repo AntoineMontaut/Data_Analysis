@@ -12,11 +12,12 @@ loans_data = pd.read_csv("loansData.csv")
 loans_data.dropna()
 # print(loans_data)
 
-x = "Revolving.CREDIT.Balance" #in the dataset I'm working with it seems that columns are misplaced
+x = "Open.CREDIT.Lines" #in the dataset I'm working with it seems that columns are misplaced
 x_name = x.replace(".", " ")
 freq = collections.Counter(loans_data[x])
 
-print("\nNote: using the small dataset it seems like the values for Open.CREDIT.Lines are under the column Revolving.CREDIT.Balance.")
+print("\nNote: using the small dataset it seems like the values for Open.CREDIT.Lines are under the column Revolving.CREDIT.Balance.\
+\nNote2: I corrected the dataset in my directory so I am using the right column name at this point.")
 
 def all_plots(data, name):
     '''Get the three plots on one figure for a specified column'''
@@ -37,6 +38,7 @@ def all_plots(data, name):
 
 #get basic plots for the selected column
 all_plots(loans_data[x], x_name)
+plt.show()
 
 #get histogram for the selected column
 # fig = plt.figure(x_name)
