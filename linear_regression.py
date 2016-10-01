@@ -28,6 +28,8 @@ ds_loans[fico] = ds_loans["FICO.Range"].map(lambda x: int(str(x).rstrip().split(
 ds_loans[int_rate] = ds_loans[int_rate].map(lambda x: float(str(x).rstrip()[:-1])/100)
 ds_loans[length] = ds_loans[length].map(lambda x: int(str(x).rstrip().split(" ")[0]))
 
+ds_loans.to_csv("loansData_clean.csv", header=True, index=False)
+
 # for col in [fico, int_rate, length]:
     # print(ds_loans[col][:5])
 def base_data_plots():
